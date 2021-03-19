@@ -3,50 +3,61 @@
 **Question 3: Ancestral Names
 ** ===================================
 */
-const ancestralNames = ['Rafael VII', 'Carlos VI', 'Carlos VII', 'Carlos IX', 'Alicia XX', 'Carlos XV']
+const ancestralNames = [
+  'Rafael VII',
+  'Carlos VI',
+  'Carlos VII',
+  'Carlos IX',
+  'Alicia XX',
+  'Carlos XV',
+];
 
 function toArabicNumber(romanNumber) {
-    const romanNumerals = ['I', 'V', 'X', 'L']
-    const numbers = [1, 5, 10, 50]
+  const romanNumerals = ['I', 'V', 'X', 'L'];
+  const numbers = [1, 5, 10, 50];
 
-    let number = 0;
-    let romanNumberDetail = romanNumber.split('');
-    romanNumberDetail = romanNumberDetail.map(letter => letter.toUpperCase())
+  let number = 0;
+  let romanNumberDetail = romanNumber.split('');
+  romanNumberDetail = romanNumberDetail.map((letter) => letter.toUpperCase());
 
-    for (let index = 0; index < romanNumberDetail.length; index++) {
-        const present = numbers[romanNumerals.indexOf(romanNumberDetail[index])]
-        const next = numbers[romanNumerals.indexOf(romanNumberDetail[index + 1])]
-        if (present < next) {
-            number -= present;
-        } else {
-            number += present;
-        }
+  for (let index = 0; index < romanNumberDetail.length; index++) {
+    const present = numbers[romanNumerals.indexOf(romanNumberDetail[index])];
+    const next = numbers[romanNumerals.indexOf(romanNumberDetail[index + 1])];
+    if (present < next) {
+      number -= present;
+    } else {
+      number += present;
     }
-    return number
+  }
+  return number;
 }
 
 function sortRoman(names) {
-    console.clear()
-    names.sort((x, y) => {
-        const detailX = x.split(' ');
-        const onlyNameX = detailX.slice(0, -1).join(' ')
-        const detailY = y.split(' ');
-        const onlyNameY = detailY.slice(0, -1).join(' ')
-        if (onlyNameX > onlyNameY) {
-            return 1
-        } else if (onlyNameX < onlyNameY) {
-            return -1
-        } else {
-            return toArabicNumber(detailX[detailX.length - 1]) > toArabicNumber(detailY[detailY.length - 1]) ? 1 : toArabicNumber(detailX[detailX.length - 1]) < toArabicNumber(detailY[detailY.length - 1]) ? -1 : 0
-        }
-    })
+  console.clear();
+  names.sort((x, y) => {
+    const detailX = x.split(' ');
+    const onlyNameX = detailX.slice(0, -1).join(' ');
+    const detailY = y.split(' ');
+    const onlyNameY = detailY.slice(0, -1).join(' ');
+    if (onlyNameX > onlyNameY) {
+      return 1;
+    } else if (onlyNameX < onlyNameY) {
+      return -1;
+    } else {
+      return toArabicNumber(detailX[detailX.length - 1]) >
+        toArabicNumber(detailY[detailY.length - 1])
+        ? 1
+        : toArabicNumber(detailX[detailX.length - 1]) <
+          toArabicNumber(detailY[detailY.length - 1])
+        ? -1
+        : 0;
+    }
+  });
 
-    names.forEach(name => {
-        console.log(name);
-    });
-
+  names.forEach((name) => {
+    console.log(name);
+  });
 }
-
 
 /*
 ** ===================================
